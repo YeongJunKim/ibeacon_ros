@@ -8,9 +8,11 @@ project(ibeacon_ros)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  roscpp
-  rospy
-  std_msgs
+message_generation
+message_runtime
+roscpp
+rospy
+std_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -103,6 +105,10 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
+  INCLUDE_DIRS include
+  LIBRARIES mw_ahrsv1
+  CATKIN_DEPENDS roscpp rospy std_msgs
+  DEPENDS system_lib
 #  INCLUDE_DIRS include
 #  LIBRARIES ibeacon_ros
 #  CATKIN_DEPENDS roscpp rospy std_msgs
@@ -117,6 +123,7 @@ catkin_package(
 ## Your package locations should be listed before other locations
 include_directories(
 # include
+  include
   ${catkin_INCLUDE_DIRS}
 )
 
@@ -134,6 +141,7 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/ibeacon_ros_node.cpp)
+add_executable(ibeacon_ros src/ibeacon.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
