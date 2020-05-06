@@ -142,6 +142,7 @@ include_directories(
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/ibeacon_ros_node.cpp)
 add_executable(ibeacon_ros src/ibeacon.cpp)
+target_link_libraries(ibeacon_ros bluetooth)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
