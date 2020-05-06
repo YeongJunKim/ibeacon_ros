@@ -1,3 +1,5 @@
+//200 EAC5BDB5DFCB48D2BE60D0A5A71G96E0 5 1 -24
+
 #include <iostream>
 #include <stdlib.h>
 #include <errno.h>
@@ -74,6 +76,7 @@ int enable_advertising(int advertising_interval, char *advertising_uuid, int maj
     hci_close_dev(device_handle);
     printf("d point 1 \r\n");
     fprintf(stderr, "Can't send request %s (%d)\n", strerror(errno), errno);
+    printf("d point 1 \r\n");
     return (1);
   }
 
