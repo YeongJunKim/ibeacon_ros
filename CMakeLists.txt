@@ -169,7 +169,9 @@ target_link_libraries(ibeacon bluetooth)
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
 catkin_install_python(PROGRAMS
-  src/testblescan.py
+  src/bluetooth_beacon.py
+  src/bluepy_scan.py
+  src/pybluez_beacon.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
