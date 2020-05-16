@@ -54,6 +54,10 @@ catkin_python_setup()
 #   Message1.msg
 #   Message2.msg
 # )
+add_message_files(DIRECTORY msg
+FILES
+beacon_frame.msg
+)
 
 ## Generate services in the 'srv' folder
 # add_service_files(
@@ -74,6 +78,7 @@ catkin_python_setup()
 #   DEPENDENCIES
 #   std_msgs
 # )
+generate_messages(DEPENDENCIES std_msgs)
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -107,7 +112,7 @@ catkin_python_setup()
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES mw_ahrsv1
-  CATKIN_DEPENDS roscpp rospy std_msgs
+  CATKIN_DEPENDS roscpp rospy std_msgs message_runtime
   DEPENDS system_lib
 #  INCLUDE_DIRS include
 #  LIBRARIES ibeacon_ros
@@ -137,12 +142,15 @@ include_directories(
 ## either from message generation or dynamic reconfigure
 # add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
+#add_dependencies(beacon_frame ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/ibeacon_ros_node.cpp)
 add_executable(ibeacon src/ibeacon.cpp)
 target_link_libraries(ibeacon bluetooth)
+add_dependencies(ibeacon ${${PROJECT_NAME}_EXPORTED_TARGETS})
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the

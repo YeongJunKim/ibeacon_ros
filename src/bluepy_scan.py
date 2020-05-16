@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 from bluepy.btle import Scanner, DefaultDelegate
-
+from ibeacon_ros.msg import beacon_frame
 
 class ScanDelegate(DefaultDelegate):
     def __init__(self):
