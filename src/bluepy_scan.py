@@ -4,6 +4,7 @@ from ibeacon_ros.msg import beacon_frame
 import rospy
 import array
 import struct
+import numpy as np
 
 class ScanDelegate(DefaultDelegate):
     def __init__(self):
@@ -15,8 +16,7 @@ class ScanDelegate(DefaultDelegate):
         #     print "Discovered device", dev.addr
         # elif isNewData:
         #     print "Received new data from", dev.addr
-
-
+  
 if __name__ == '__main__':
     pub = rospy.Publisher('/beacon/info', beacon_frame, queue_size=1)
     rospy.init_node('bluepy', anonymous=True)
@@ -28,32 +28,21 @@ if __name__ == '__main__':
             for (adtype, desc, value) in dev.getScanData():
                 if desc == "Manufacturer":
                     value = value.encode('utf-8')
+                    dev.addr = dev.addr.encode('utf-8')
                     if value[8:16] == "74278bda":
                         data = beacon_frame()
                         data.factory_id = value[0:8]
                         data.ibeacon_id = value[8:40]
-                        data.major = value[40:44]
-                        data.minor = value[44:48]
-                        data.RSSI = dev.rssi
-                        num = value[48:50]
-                        num = num.encode()
-                        print type(num)
-                        print num
-                        # num = bytearray(value[48:50])                        
-                        print "data tx power : ", value[48:50]
-                        
-                        # data.max
-                        # data.RSSI
-                        # data.txpower
+                        data.major      = value[40:44]
+                        data.minor      = value[44:48]
+                        data.RSSI       = dev.rssi
+                        data.txpower    = value[48:50]
+                        data.mac        = dev.addr
+
                         print data
-                        # print value
-                        # print dev.addr
-                        # print dev.rssi
                         pub.publish(data)
 
             #print(dev.getScanData())
-            
-            
             # for (adtype, desc, value) in dev.getScanData():
             #     print "  %s = %s" % (desc, value)
             #     if desc == "Manufacturer":
