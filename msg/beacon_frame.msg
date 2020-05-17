@@ -3,5 +3,5 @@ string ibeacon_id
 string major
 string minor
 string mac
+string txpower
 int16 RSSI
-int16 txpower
