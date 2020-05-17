@@ -54,9 +54,9 @@ catkin_python_setup()
 #   Message1.msg
 #   Message2.msg
 # )
-add_message_files(DIRECTORY msg
-FILES
-beacon_frame.msg
+add_message_files(
+DIRECTORY msg
+FILES beacon_frame.msg
 )
 
 ## Generate services in the 'srv' folder
