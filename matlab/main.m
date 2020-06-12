@@ -14,7 +14,7 @@ global FIR_FILTER EKF_FILTER PF_FILTER
 
 addpath('/.');
 addpath('/home/colson/catkin_ws/src/matlab_gen/msggen');
-master_ip = "192.168.0.3";
+master_ip = 'localhost';
 
 rosshutdown();
 rosinit(master_ip);
@@ -31,6 +31,9 @@ app.beacon_addr{1} = "b4:52:a9:1b:55:20";
 app.beacon_addr{2} = "b4:52:a9:1b:56:a7";
 app.beacon_addr{3} = "50:51:a9:ff:8f:18";
 app.beacon_addr{4} = "b4:52:a9:1a:a5:fc";
+% app.beacon_num = 1;
+% app.beacon_addr= cell(app.beacon_num,1);
+% app.beacon_addr{1} = "b4:52:a9:1b:56:a7";
 
 app.beacon_namespace = cell(app.beacon_num,1);
 app.beacon_namespace{1} = "/beacon1";
@@ -46,6 +49,8 @@ app.init_state1 = [0.45, -0.45, 0]';
 app.tile_size = 0.45;
 app.tile_num = 2;
 app.dt = 0.2;
+
+app.filteringflag = 0;
 
 filter_init();
 

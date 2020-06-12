@@ -26,6 +26,7 @@ x1 = 0; y1 = 0;
 x2 = 0; y2 = a;
 x3 = a; y3 = a;
 x4 = a; y4 = 0;
+x4 = 1.35; y4 = 0;
 % x1 = app.anchor_position(1,1); y1 = app.anchor_position(2,1);
 % x2 = app.anchor_position(1,2); y2 = app.anchor_position(2,2);
 % x3 = app.anchor_position(1,3); y3 = app.anchor_position(2,3);

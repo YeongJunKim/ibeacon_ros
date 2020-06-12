@@ -12,6 +12,7 @@ if isempty(firstRun)
    disp("init timer");
    
    app.distance = zeros(app.beacon_num,1);
+   app.filtered_distance = zeros(app.beacon_num,1);
    app.trajectory = zeros(3,1000);
    step = 1;
    firstRun = 1; 
@@ -21,7 +22,7 @@ if isempty(firstRun)
    plot(0,0, 'o'); hold on;
    plot(0,0.9, 'o'); hold on;
    plot(0.9,0.9, 'o'); hold on;
-   plot(0.9,0, 'o'); hold on;
+   plot(1.35,0, 'o'); hold on;
 end
 
 disp(step);
@@ -31,19 +32,26 @@ disp(step);
 BEACONS.data.rssi;
 
 
-for i = 1:4
+for i = 1:app.beacon_num
 %     distance(i) = calculateDistance(double(BEACONS.data(i).rssi));
-    app.distance(i) = calculateDistance2(-59, double(BEACONS.data(i).rssi));
-
+%     app.distance(i) = calculateDistance2(-59, double(BEACONS.data(i).rssi));
+    app.distance(i) = beacon_getdistance_index(BEACONS, i);
 end
+
+app.filtered_distance = (0.5) * app.filtered_distance + (1-0.5) * app.distance;
+
+app.filtered_distance
     
-z = [app.distance' 0]'
+z = [app.filtered_distance' 0]';
 % state = FIR_PEFFME_run(FIR_FILTER(1).filter, 0, 
+
+if(app.filteringflag == 1)
 app.trajectory(:,step) = FIR_PEFFME_run(FIR_FILTER(1).filter, 0, [0,0]', z, 1);
 plot(app.trajectory(1,step), app.trajectory(2,step), 'o');
 xlim([-1, 2]);
 ylim([-1, 2]);
 % drawnow;
+end
 
 % disp(app.distance);
 
@@ -80,12 +88,13 @@ function r = calculateDistance2(txPower, rssi)
         return;
     end
     ratio =rssi * 1.0 / txPower;
-    
+     
     if ratio < 0.5
        r = ratio^10;
+       disp("1");
     else
-        accuracy = (1.89976)*ratio^(2.7095) + 0.111; 
-        r = accuracy; 
+        accuracy = (1.39976)*ratio^(2.3095) + 0.061;  
+        r = accuracy;  
     end
 
 end
