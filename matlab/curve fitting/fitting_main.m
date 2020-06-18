@@ -14,7 +14,7 @@ global app
 global BEACONS
 global FIR_FILTER EKF_FILTER PF_FILTER
 
-master_ip = 'localhost';
+master_ip = "http://192.168.0.3:11311";
 
 rosshutdown();
 rosinit(master_ip);

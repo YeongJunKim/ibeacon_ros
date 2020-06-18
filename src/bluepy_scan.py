@@ -19,6 +19,7 @@ class ScanDelegate(DefaultDelegate):
   
 if __name__ == '__main__':
     pub = rospy.Publisher('/beacon/info', beacon_frame, queue_size=1)
+    print("ibeacon_bluepy")
     rospy.init_node('bluepy', anonymous=True)
     while(1):
         scanner = Scanner().withDelegate(ScanDelegate())

@@ -52,14 +52,17 @@ classdef beacon < handle
             obj.namespace = namespace;
             obj.addrs = addrs;
             obj.s = size(addrs,1);
+            obj.data(1).factoryid = 0;
             obj.distance = zeros(obj.s, 1);
             obj.sub_beacon = rossubscriber(strcat(namespace,'/beacon/info'), {@beacon_callback, obj});
         end
+        
         function obj = beacon_addSubscrier(obj, topic, callback)
             obj.sub_type(obj.addcount).data = rossubscriber(topic, {callback, obj});
             obj.sub_added(obj.addcount).data = obj.sub_type;
             obj.addcount = obj.addcount + 1;
         end
+        
         function r = beacon_getdistance_addr(obj, addr)
             for i = 1:obj.s
                if strcmp(obj.addrs{i}, addr)
