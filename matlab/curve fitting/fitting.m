@@ -46,10 +46,14 @@ myfit=fit([rssi' txpower'],y',myfittype,'StartPoint',[0.3 3.5 0.08],'Lower', [0.
 
 disp(myfit);
 
-z = myfit.a * (rssi / -59).^myfit.b + (myfit.c);
+interval = -80:1:-30
+z = myfit.a * (interval / -59).^myfit.b + (myfit.c);
+zz = 0.89976 * (interval / -59).^7.7095 + (0.111);
 
-plot(rssi,z, '*'); hold on;
+plot(interval,z, 'b-*'); hold on;
+plot(interval,zz, 'c-*'); hold on;
 plot(rssi,y, 'o');
+legend('get', 'ref', 'collected');
 
 
 % rssi = [-115 -84 -81 -77 -72 -69 -65 -59]
