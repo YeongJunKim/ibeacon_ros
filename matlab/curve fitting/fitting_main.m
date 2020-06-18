@@ -39,10 +39,10 @@ app.beacon_namespace{4} = "/beacon4";
 
 app.const_distance = zeros(app.beacon_num ,1);
 
-app.const_distance(1) = 0.45;
-app.const_distance(2) = 0.45;
-app.const_distance(3) = 0.45;
-app.const_distance(4) = 0.45;
+app.const_distance(1) = sqrt((0.45*1)^2 + (0.45*12)^2);
+app.const_distance(2) = sqrt((0.45*1)^2 + (0.45*13)^2);
+app.const_distance(3) = sqrt((0.45*1)^2 + (0.45*14)^2);
+app.const_distance(4) = sqrt((0.45*1)^2 + (0.45*15)^2);
 
 app.savenumber = 10000;
 app.fittingtable = cell(4, app.beacon_num, app.savenumber);

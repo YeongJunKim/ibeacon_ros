@@ -124,7 +124,9 @@ function r = beacon_distance(txPower, rssi)
        r = ratio^10;
        disp("1");
     else
-        accuracy = (1.39976)*ratio^(2.8095) + 0.11;  
+        
+%         accuracy = (1.39976)*ratio^(2.8095) + 0.11;    
+        accuracy = (2536)*ratio^(0.003271) + -2531;  
         r = accuracy;  
     end
 

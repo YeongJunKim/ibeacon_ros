@@ -22,7 +22,7 @@ if isempty(firstRun)
    plot(0,0, 'o'); hold on;
    plot(0,0.9, 'o'); hold on;
    plot(0.9,0.9, 'o'); hold on;
-   plot(1.35,0, 'o'); hold on;
+   plot(0.9,0, 'o'); hold on;
 end
 
 disp(step);
@@ -33,24 +33,25 @@ BEACONS.data.rssi;
 
 
 for i = 1:app.beacon_num
-%     distance(i) = calculateDistance(double(BEACONS.data(i).rssi));
-%     app.distance(i) = calculateDistance2(-59, double(BEACONS.data(i).rssi));
+     distance(i) = calculateDistance(double(BEACONS.data(i).rssi));
+     app.distance(i) = calculateDistance2(-59, double(BEACONS.data(i).rssi));
     app.distance(i) = beacon_getdistance_index(BEACONS, i);
 end
 
 app.filtered_distance = (0.5) * app.filtered_distance + (1-0.5) * app.distance;
 
-app.filtered_distance
+% app.filtered_distance
     
 z = [app.filtered_distance' 0]';
-% state = FIR_PEFFME_run(FIR_FILTER(1).filter, 0, 
+% state = FIR_PEFFME_run(FIR_FILTER(1).filter, 0, 1);
 
 if(app.filteringflag == 1)
 app.trajectory(:,step) = FIR_PEFFME_run(FIR_FILTER(1).filter, 0, [0,0]', z, 1);
+disp(app.trajectory(:,step))
 plot(app.trajectory(1,step), app.trajectory(2,step), 'o');
-xlim([-1, 2]);
-ylim([-1, 2]);
-% drawnow;
+xlim([-2, 2]);
+ylim([-2, 2]);
+drawnow;
 end
 
 % disp(app.distance);
