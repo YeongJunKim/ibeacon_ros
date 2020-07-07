@@ -29,7 +29,11 @@ if step <= 100
 else
     file_name = string(datetime('now'))
     file_name = strcat(file_name, "_");
-    file_name = strcat(file_name, app.fittingtable{1,1,1});
+    if(app.beacon_num > 1)
+        file_name = strcat(file_name, 'multiple beacon');
+    else
+        file_name = strcat(file_name, app.fittingtable{1,1,1});
+    end
     file_name = strcat(file_name, "_raw data.mat");
     
     save(file_name, 'app');
