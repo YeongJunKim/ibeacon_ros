@@ -34,6 +34,9 @@ else
     else
         file_name = strcat(file_name, app.fittingtable{1,1,1});
     end
+    
+    file_name = strrep(file_name,':','.');
+    
     file_name = strcat(file_name, "_raw data.mat");
     
     save(file_name, 'app');
