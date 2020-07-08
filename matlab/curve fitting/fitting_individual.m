@@ -54,7 +54,7 @@ for i = 1:app.beacon_num
     % txpower = [1 2 3 4 5 6 7 8 9 1 5 3 2]
     % y = [2 3 3 3 4 5 6 10 23 100 2 3 20] 
 
-    myfit=fit([rssi' txpower'],y',myfittype,'StartPoint',[3 7 0.2],'Lower', [0.1 4 0.05], 'Upper', [5 8 0.15]);
+    myfit=fit([rssi' txpower'],y',myfittype,'StartPoint',[3 0 0.05],'Lower', [0.1 5 0.05], 'Upper', [5 8 0.11]);
 
     disp(myfit);
 
