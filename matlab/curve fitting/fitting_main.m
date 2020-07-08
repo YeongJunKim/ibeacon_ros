@@ -19,10 +19,6 @@ master_ip = "http://192.168.0.18:11311";
 rosshutdown();
 rosinit(master_ip);
 
-
-
-
-
 app.beacon_num = 4;
 app.beacon_addr= cell(app.beacon_num,1);
 app.beacon_addr{1} = "b4:52:a9:1b:55:20";
@@ -39,12 +35,19 @@ app.beacon_namespace{4} = "/beacon4";
 
 app.const_distance = zeros(app.beacon_num ,1);
 
-app.const_distance(1) = sqrt((0.45*1)^2 + (0.45*12)^2);
-app.const_distance(2) = sqrt((0.45*1)^2 + (0.45*13)^2);
-app.const_distance(3) = sqrt((0.45*1)^2 + (0.45*14)^2);
-app.const_distance(4) = sqrt((0.45*1)^2 + (0.45*15)^2);
+app.tile_size = 0.6
+app.tile_num = zeros(2,app.beacon_num);
+app.tile_num(:,1) = [1,1];
+app.tile_num(:,2) = [2,1];
+app.tile_num(:,3) = [3,1];
+app.tile_num(:,4) = [4,1];
 
-app.savenumber = 10000;
+app.const_distance(1) = norm((tile_num(:,1)*tile_size));
+app.const_distance(2) = norm((tile_num(:,2)*tile_size));
+app.const_distance(3) = norm((tile_num(:,3)*tile_size));
+app.const_distance(4) = norm((tile_num(:,4)*tile_size));
+
+app.savenumber = 100;
 app.fittingtable = cell(4, app.beacon_num, app.savenumber);
 
 % mac adress  {["b4:52:a9:1b:55:20"]}    {["b4:52:a9:1b:56:a7"]}    {["50:51:a9:ff:8f:18"]}    {["b4:52:a9:1a:a5:fc"]}

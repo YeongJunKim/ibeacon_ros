@@ -19,7 +19,7 @@ end
 
 disp(step);
 
-if step <= 100
+if step <= app.savenumber
     for i = 1:app.beacon_num
         app.fittingtable{2,i,step} = app.const_distance(i);
         app.fittingtable{3,i,step} = BEACONS.data(i).rssi;
