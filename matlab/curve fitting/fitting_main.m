@@ -15,6 +15,7 @@ global BEACONS
 global FIR_FILTER EKF_FILTER PF_FILTER
 
 master_ip = "http://192.168.0.18:11311";
+master_ip = "localhost"
 
 rosshutdown();
 rosinit(master_ip);
@@ -35,17 +36,17 @@ app.beacon_namespace{4} = "/beacon4";
 
 app.const_distance = zeros(app.beacon_num ,1);
 
-app.tile_size = 0.6
+app.tile_size = 0.3
 app.tile_num = zeros(2,app.beacon_num);
 app.tile_num(:,1) = [1,1];
-app.tile_num(:,2) = [2,1];
-app.tile_num(:,3) = [3,1];
-app.tile_num(:,4) = [4,1];
+app.tile_num(:,2) = [1,1];
+app.tile_num(:,3) = [1,1];
+app.tile_num(:,4) = [1,1];
 
-app.const_distance(1) = norm((tile_num(:,1)*tile_size));
-app.const_distance(2) = norm((tile_num(:,2)*tile_size));
-app.const_distance(3) = norm((tile_num(:,3)*tile_size));
-app.const_distance(4) = norm((tile_num(:,4)*tile_size));
+app.const_distance(1) = norm((app.tile_num(:,1)*app.tile_size));
+app.const_distance(2) = norm((app.tile_num(:,2)*app.tile_size));
+app.const_distance(3) = norm((app.tile_num(:,3)*app.tile_size));
+app.const_distance(4) = norm((app.tile_num(:,4)*app.tile_size));
 
 app.savenumber = 100;
 app.fittingtable = cell(4, app.beacon_num, app.savenumber);

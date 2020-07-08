@@ -4,10 +4,11 @@
 
 %% Collect data from sampled data
 clear all;
-addpath("./sampled_data/");
-listdir = dir("sampled_data/");
+clf;
+addpath("./2020-07-08-sampled_data/");
+listdir = dir("2020-07-08-sampled_data/");
 
-data_size_s = 18;
+data_size_s = 3;
 data_size_t = size(listdir);
 load(listdir(3).name);
 data_arr = zeros(3,4,100000);
@@ -44,7 +45,7 @@ for i = 1:app.beacon_num
     % txpower = [1 2 3 4 5 6 7 8 9 1 5 3 2]
     % y = [2 3 3 3 4 5 6 10 23 100 2 3 20] 
 
-    myfit=fit([rssi' txpower'],y',myfittype,'StartPoint',[0.3 3.5 0.08],'Lower', [0.1 1.5 0.04]);
+    myfit=fit([rssi' txpower'],y',myfittype,'StartPoint',[0.7 7 0.2],'Lower', [0.1 5 0.05], 'Upper', [2 8 0.2]);
 
     disp(myfit);
 

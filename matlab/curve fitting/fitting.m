@@ -5,7 +5,8 @@
 %% Collect data from sampled data
 clear all;
 addpath("./sampled_data/");
-listdir = dir("sampled_data/");
+addpath("./2020-07-08-sampled_data/")
+listdir = dir("2020-07-08-sampled_data/");
 
 data_size_s = 3;
 data_size_t = size(listdir);

@@ -22,7 +22,8 @@ if __name__ == '__main__':
     print("ibeacon_bluepy")
     rospy.init_node('bluepy', anonymous=True)
     while(1):
-        scanner = Scanner().withDelegate(ScanDelegate())
+        
+        scanner = Scanner(iface=1).withDelegate(ScanDelegate())
         devices = scanner.scan(0.05)
         for dev in devices:
             #print "Device %s (%s), RSSI=%d dB" % (dev.addr, dev.addrType, dev.rssi)
