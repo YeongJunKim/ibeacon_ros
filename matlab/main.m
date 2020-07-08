@@ -1,5 +1,5 @@
 clc;
-close all;
+clf;
 clear all;
 delete_timer;
 
@@ -14,6 +14,7 @@ global FIR_FILTER EKF_FILTER PF_FILTER
 
 addpath('/.');
 addpath('/home/colson/catkin_ws/src/matlab_gen/msggen');
+addpath(genpath('/home/colson/workspace/matlab/filters'));
 master_ip = 'localhost';
 
 rosshutdown();
@@ -45,14 +46,17 @@ app.beacon_namespace{4} = "/beacon4";
 BEACONS = beacon;
 beacon_init(BEACONS, "", app.beacon_addr);
 
-app.init_state1 = [0.45, -0.45, 0]';
-app.tile_size = 0.45;
-app.tile_num = 2;
-app.dt = 0.2;
+app.init_state1 = [3.6, -0.6, 0]';
+app.tile_size = 0.6;
+app.tile_num = 8;
+app.dt = 0.4;
 
-app.filteringflag = 0;
+app.filteringflag = 1;
 
-filter_init();
+
+if (app.filteringflag == 1)
+    filter_init();
+end
 
 
 

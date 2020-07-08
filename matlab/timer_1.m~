@@ -19,11 +19,10 @@ if isempty(firstRun)
 
    figure(1);    
    clf;
-   edge = app.tile_num * app.tile_size;
-   plot(0,0, 'o', 'MarkerSize', 10); hold on;
-   plot(0,edge, 'o', 'MarkerSize', 10); hold on;
-   plot(edge,edge, 'o', 'MarkerSize', 10); hold on;
-   plot(edge,0, 'o', 'MarkerSize', 10); hold on;
+   plot(0,0, 'o'); hold on;
+   plot(0,0.9, 'o'); hold on;
+   plot(0.9,0.9, 'o'); hold on;
+   plot(0.9,0, 'o'); hold on;
 end
 
 disp(step);
@@ -34,12 +33,10 @@ BEACONS.data.rssi;
 
 
 for i = 1:app.beacon_num
-%      distance(i) = calculateDistance(double(BEACONS.data(i).rssi));
-%      app.distance(i) = calculateDistance2(-59, double(BEACONS.data(i).rssi));
+     distance(i) = calculateDistance(double(BEACONS.data(i).rssi));
+     app.distance(i) = calculateDistance2(-59, double(BEACONS.data(i).rssi));
     app.distance(i) = beacon_getdistance_index(BEACONS, i);
 end
-fprintf("distance : %f,%f,%f,%f\n",app.distance(1),app.distance(2), app.distance(3), app.distance(4));
-
 
 app.filtered_distance = (0.5) * app.filtered_distance + (1-0.5) * app.distance;
 
@@ -50,10 +47,10 @@ z = [app.filtered_distance' 0]';
 
 if(app.filteringflag == 1)
 app.trajectory(:,step) = FIR_PEFFME_run(FIR_FILTER(1).filter, 0, [0,0]', z, 1);
-disp(app.trajectory(:,step));
+disp(app.trajectory(:,step))
 plot(app.trajectory(1,step), app.trajectory(2,step), 'o');
-xlim([-0.2, 5]);
-ylim([-0.2, 5]);
+xlim([-1, 2]);
+ylim([-1, ]);
 drawnow;
 end
 
@@ -97,7 +94,7 @@ function r = calculateDistance2(txPower, rssi)
        r = ratio^10;
        disp("1");
     else
-        accuracy = (3.4)*ratio^(7) + 0.11;  
+        accuracy = (1.39976)*ratio^(2.3095) + 0.061;  
         r = accuracy;  
     end
 

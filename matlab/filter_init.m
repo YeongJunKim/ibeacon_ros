@@ -89,7 +89,7 @@ x_main_hat_FIR = app.init_state1;
 % x_sub1_hat_FIR = app.init_state2;
 % x_sub2_hat_FIR = app.init_state3;
 
-FIR_init(FIR_FILTER(1).filter, 8, 3, 5, 2, f_main, Jacobian_F_main, h_main, Jacobian_H_main, x_main_hat_FIR);
+FIR_init(FIR_FILTER(1).filter, 15, 3, 5, 2, f_main, Jacobian_F_main, h_main, Jacobian_H_main, x_main_hat_FIR);
 % FIR_init(FIR_FILTER(2).filter, 8, 5, 5, 2, f_sub, Jacobian_F_sub, h_sub, Jacobian_H_sub, x_sub1_hat_FIR);
 % FIR_init(FIR_FILTER(3).filter, 8, 5, 5, 2, f_sub, Jacobian_F_sub, h_sub, Jacobian_H_sub, x_sub2_hat_FIR);
 
